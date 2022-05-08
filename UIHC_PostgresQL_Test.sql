@@ -21,7 +21,7 @@ where class = 'Rehab'
 and patientid in (select patientid from visit where class = 'Inpatient')
 
 Q4
-select patientid, class, lag(startdat,1) over (partition by patientid order by startdate) as prev_visit_date
+select patientid, class, lag(startdate,1) over (partition by patientid order by startdate) as prev_visit_date
 from visit
 where class != 'Rehab'
 
