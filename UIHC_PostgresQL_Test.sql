@@ -22,11 +22,13 @@ where class = 'Rehab'
 and patientid in (select patientid from visit where class = 'Inpatient')
 
 Q4
-select patientid, class, startdate as visit_date, lag(startdate,1) over (partition by patientid order by startdate) as prev_visit_date
+select patientid, class, startdate as visit_date, 
+lag(startdate,1) over (partition by patientid order by startdate) as prev_visit_date
 from visit
 where class != 'Rehab'
 
 Q5
 with rank as (select lastname, role, EXTRACT(YEAR FROM hireDate) as year from employee)
-select lastname, role, dense_rank() over(order by year desc) as ranking
+select lastname, role, 
+dense_rank() over(order by year desc) as ranking
 from rank
