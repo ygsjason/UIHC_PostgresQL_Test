@@ -1,10 +1,12 @@
---Test_Date:05082022
+--UIHC_SQL_Test_Date:05082022
+
 Q1
 with temp_cte as 
 (select id, lastName, role, department from employee),
 temp_emp as (select id, lastName, role, department, supervisorId from employee)
  select * from temp_emp
 left join temp_cte on temp_emp.supervisorId = temp_cte.id
+order by temp_cte.lastName, temp_cte.department
 
 Q2
 with temp_v as (select * from visit where class = 'Inpatient'),
